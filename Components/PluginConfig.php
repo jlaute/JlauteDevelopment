@@ -21,12 +21,8 @@ class PluginConfig
 
     public function getEnvironment(): string
     {
-        if ($this->config['jlaute_is_dev']) {
-            return 'dev';
-        }
-
-        if ($this->config['jlaute_is_staging']) {
-            return 'staging';
+        if ($this->config['jlauteEnvironment']) {
+            $this->config['jlauteEnvironment'];
         }
 
         if ($this->environment !== 'production') {

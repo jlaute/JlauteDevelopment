@@ -3,17 +3,19 @@
         xsi:noNamespaceSchemaLocation="../../../../engine/Shopware/Components/Plugin/schema/config.xsd">
 
     <elements>
-        <element type="boolean">
-            <name>jlaute_is_dev</name>
-            <label>Dev Environment</label>
-            <label lang="de">Dev Umgebung</label>
-            <value>1</value>
-        </element>
-        <element type="boolean">
-            <name>jlaute_is_staging</name>
-            <label>Staging Environment</label>
-            <label lang="de">Staging Umgebung</label>
-            <value>0</value>
+        <element type="select">
+            <name>jlauteEnvironment</name>
+            <label>Environment</label>
+            <store>
+                <option>
+                    <value>dev</value>
+                    <label>dev</label>
+                </option>
+                <option>
+                    <value>staging</value>
+                    <label>staging</label>
+                </option>
+            </store>
         </element>
     </elements>
 

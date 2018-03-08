@@ -13,9 +13,28 @@
             <tag name="shopware.event_subscriber" />
         </service>
 
-        <service id="jlaute.development.service.config" class="Doctrine\Common\Collections\ArrayCollection">
+        <service id="jlaute_development.subscriber.frontend" class="JlauteDevelopment\Subscriber\Frontend">
+            <argument type="service" id="jlaute.development.service.config" />
+            <tag name="shopware.event_subscriber" />
+        </service>
+
+        <service id="jlaute_development.subscriber.template" class="JlauteDevelopment\Subscriber\Template">
+            <argument type="string">%jlaute_development.backend_view_dir%</argument>
+            <tag name="shopware.event_subscriber" />
+        </service>
+
+        <service id="jlaute.development.service.config" class="JlauteDevelopment\Components\PluginConfig">
+            <argument type="service" id="jlaute.development.values.config" />
+            <argument type="service" id="jlaute.development.values.env" />
+        </service>
+
+        <service id="jlaute.development.values.config" class="Doctrine\Common\Collections\ArrayCollection">
             <factory service="shopware.plugin.cached_config_reader" method="getByPluginName" />
             <argument type="string">JlauteDevelopment</argument>
+        </service>
+
+        <service id="jlaute.development.values.env" class="Doctrine\Common\Collections\ArrayCollection">
+            <factory service="kernel" method="getEnvironment" />
         </service>
     </services>
 </container>

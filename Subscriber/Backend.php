@@ -1,19 +1,17 @@
 <?php
-/**
- * © solutionDrive GmbH
- */
 
 namespace JlauteDevelopment\Subscriber;
 
 use Enlight\Event\SubscriberInterface;
 use Enlight_Event_EventArgs as EventArgs;
+use JlauteDevelopment\Components\PluginConfig;
 
 /**
- * @author    Jörg Lautenschlager <jl@solutiondrive.de>
+ * @author    Jörg Lautenschlager <joerg.lautenschlager@gmail.com>
  */
 class Backend implements SubscriberInterface
 {
-    /** @var array  */
+    /** @var PluginConfig  */
     private $pluginConfig;
 
     /** @var string */
@@ -26,7 +24,7 @@ class Backend implements SubscriberInterface
         ];
     }
 
-    public function __construct(array $pluginConfig, string $backendViewDir)
+    public function __construct(PluginConfig $pluginConfig, string $backendViewDir)
     {
         $this->pluginConfig = $pluginConfig;
         $this->backendViewDir = $backendViewDir;
@@ -36,7 +34,7 @@ class Backend implements SubscriberInterface
     {
         /** @var \Enlight_View_Default $view */
         $view = $args->getSubject()->View();
-        $view->assign($this->pluginConfig);
+        $view->assign($this->pluginConfig->toArray());
         $view->addTemplateDir($this->backendViewDir);
         $view->extendsTemplate('backend/index/jlaute_development/index.tpl');
     }

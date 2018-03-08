@@ -9,12 +9,14 @@
     <services>
         <service id="jlaute_development.subscriber.backend" class="JlauteDevelopment\Subscriber\Backend">
             <argument type="service" id="jlaute.development.service.config" />
+            <argument type="service" id="template" />
             <argument type="string">%jlaute_development.backend_view_dir%</argument>
             <tag name="shopware.event_subscriber" />
         </service>
 
         <service id="jlaute_development.subscriber.frontend" class="JlauteDevelopment\Subscriber\Frontend">
             <argument type="service" id="jlaute.development.service.config" />
+            <argument type="service" id="template" />
             <tag name="shopware.event_subscriber" />
         </service>
 

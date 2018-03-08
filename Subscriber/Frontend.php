@@ -13,6 +13,9 @@ class Frontend implements SubscriberInterface
     /** @var PluginConfig */
     private $pluginConfig;
 
+    /** @var \Enlight_Template_Manager */
+    private $view;
+
     public static function getSubscribedEvents()
     {
         return [
@@ -20,15 +23,15 @@ class Frontend implements SubscriberInterface
         ];
     }
 
-    public function __construct(PluginConfig $pluginConfig)
+    public function __construct(PluginConfig $pluginConfig, \Enlight_Template_Manager $view)
     {
         $this->pluginConfig = $pluginConfig;
+        $this->view = $view;
     }
 
     public function postDispatch(\Enlight_Controller_ActionEventArgs $args)
     {
-        $view = $args->getSubject()->View();
         $env = $this->pluginConfig->getEnvironment();
-        $view->assign('jlauteEnvironment', $env);
+        $this->view->assign('jlauteEnvironment', $env);
     }
 }

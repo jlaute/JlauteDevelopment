@@ -14,6 +14,9 @@ class Backend implements SubscriberInterface
     /** @var PluginConfig  */
     private $pluginConfig;
 
+    /** @var \Enlight_Template_Manager */
+    private $view;
+
     /** @var string */
     private $backendViewDir;
 
@@ -24,9 +27,10 @@ class Backend implements SubscriberInterface
         ];
     }
 
-    public function __construct(PluginConfig $pluginConfig, string $backendViewDir)
+    public function __construct(PluginConfig $pluginConfig, \Enlight_Template_Manager $view, string $backendViewDir)
     {
         $this->pluginConfig = $pluginConfig;
+        $this->view = $view;
         $this->backendViewDir = $backendViewDir;
     }
 
@@ -38,6 +42,6 @@ class Backend implements SubscriberInterface
         $view->extendsTemplate('backend/index/jlaute_development/index.tpl');
 
         $environment = $this->pluginConfig->getEnvironment();
-        $view->assign('jlauteEnvironment', $environment);
+        $this->view->assign('jlauteEnvironment', $environment);
     }
 }

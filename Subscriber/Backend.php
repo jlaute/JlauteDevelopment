@@ -34,8 +34,10 @@ class Backend implements SubscriberInterface
     {
         /** @var \Enlight_View_Default $view */
         $view = $args->getSubject()->View();
-        $view->assign($this->pluginConfig->toArray());
         $view->addTemplateDir($this->backendViewDir);
         $view->extendsTemplate('backend/index/jlaute_development/index.tpl');
+
+        $environment = $this->pluginConfig->getEnvironment();
+        $view->assign('jlauteEnvironment', $environment);
     }
 }

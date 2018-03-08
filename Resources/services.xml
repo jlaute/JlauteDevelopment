@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="jlaute_development.backend_view_dir">%jlaute_development.plugin_dir%/Resources/views</parameter>
+    </parameters>
+    <services>
+        <service id="jlaute_development.subscriber.backend" class="JlauteDevelopment\Subscriber\Backend">
+            <argument type="service" id="jlaute.development.service.config" />
+            <argument type="string">%jlaute_development.backend_view_dir%</argument>
+            <tag name="shopware.event_subscriber" />
+        </service>
+
+        <service id="jlaute.development.service.config" class="Doctrine\Common\Collections\ArrayCollection">
+            <factory service="shopware.plugin.cached_config_reader" method="getByPluginName" />
+            <argument type="string">JlauteDevelopment</argument>
+        </service>
+    </services>
+</container>
